@@ -3,7 +3,7 @@ Simple job center script using ESX or QBcore but you can easily implement custom
 
 # Links
 - Preview: https://youtu.be/5rzJKiQ6fvM?si=IWmVInoT3v2SnDXv
-- Cfx post: https://forum.cfx.re/t/standalone-free-finalz-fishing/5253896
+- Cfx post: https://forum.cfx.re/t/qb-esx-free-finalz-jobcenter/5254232
 - our discord: https://discord.gg/nJ4BDGWrrV
 # The script features:
 - Easy to configure

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://db.onlinewebfonts.com/c/1dc8ecd8056a5ea7aa7de1db42b5b639?family=Gilroy-Regular"
+        rel="stylesheet">
+    <link href="https://db.onlinewebfonts.com/c/000833a3a58fb083c44b9de42c2ff0a2?family=Gilroy-SemiBold"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+
+<body class="" style="display: none;">
+    <div id="app" class="flex justify-center items-center h-screen select-none">
+        <div class="w-[80vw] bg-[#2D1112] h-[88vh] rounded-md text-white flex flex-col font-display">
+            <header class="flex w-full h-fit px-5 py-5 border-b-2 border-white/70">
+                <p class="text-3xl my-auto">Hi,&nbsp<span>{{playerName}}</span>!</p>
+                <p class="mx-auto my-auto text-2xl">Please choose from the available jobs!</p>
+                <img class="rounded-full w-[4.5rem]"
+                    src="https://cdn.discordapp.com/attachments/805008204290326568/1267205410473902080/64f1c5bae76cddba149539ba53513866c1dde1a7.png?ex=66a7f081&is=66a69f01&hm=d18e3ab2febe7594d81a51e37759c993e05596e296e8904fe35aa0d0392e290c&">
+            </header>
+
+            <div class="w-full h-full flex px-5 py-5">
+                <div class="prev w-[3.8rem] h-[3.8rem] rounded-md border self-center flex cursor-pointer hover:scale-105 transition-all"
+                    onclick="swiper.slidePrev()">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-6 h-6 self-center mx-auto rotate-180">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
+                    </svg>
+                </div>
+                <main class="w-[85%] h-full flex justify-center items-center swiper">
+                    <section class="w-full h-full flex swiper-wrapper" id="slider">
+                        <div v-for="(list, index) in list" :key="list.identifier"
+                            class="swiper-slide w-[21vw] h-[65vh] rounded-md bg-[#3E1918] self-center p-5">
+                            <header class="w-full h-1/2 flex flex-col ">
+                                <p class="text-4xl ">${{list.salary}}<span class="text-xl">/month</span></p>
+                                <h1 class="text-3xl my-auto">{{list.label}}</h1>
+                                <p>
+                                    {{list.description}}
+                                </p>
+                                <hr class="mt-5">
+                            </header>
+                            <section>
+                                <ul v-for="(benefits, index) in list.benefits" class="text-xl pt-5 flex flex-col gap-3">
+                                    <span class="flex gap-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" data-slot="icon" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M6.633 10.25c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 0 1 2.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 0 0 .322-1.672V2.75a.75.75 0 0 1 .75-.75 2.25 2.25 0 0 1 2.25 2.25c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282m0 0h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 0 1-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 0 0-1.423-.23H5.904m10.598-9.75H14.25M5.904 18.5c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 0 1-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 9.953 4.167 9.5 5 9.5h1.053c.472 0 .745.556.5.96a8.958 8.958 0 0 0-1.302 4.665c0 1.194.232 2.333.654 3.375Z" />
+                                        </svg>
+                                        <li>{{benefits}}</li>
+                                    </span>
+                                </ul>
+                            </section>
+                            <footer class="w-full h-1/6 flex justify-center items-center gap-5">
+                                <button @click="selectJob(list.job)"
+                                    class="border rounded-md p-3 cursor-pointer hover:scale-105 transition-all">Apply
+                                    for the
+                                    job
+                                </button>
+                               
+                            </footer>
+                        </div>
+                    </section>
+                    <div class="swiper-pagination z-10"></div>
+                </main>
+                <div class="next w-[3.8rem] h-[3.8rem] rounded-md border self-center flex cursor-pointer hover:scale-105 transition-all"
+                    onclick="swiper.slideNext()">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-6 h-6 self-center mx-auto">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.31/vue.global.prod.min.js"></script>
+
+    <script src="script.js"></script>
+</body>
+<style>
+    @font-face {
+        font-family: 'display';
+        src: url('https://db.onlinewebfonts.com/c/1dc8ecd8056a5ea7aa7de1db42b5b639?family=Gilroy-Regular');
+    }
+    @font-face {
+        font-family: 'gbold';
+        src: url('https://db.onlinewebfonts.com/c/000833a3a58fb083c44b9de42c2ff0a2?family=Gilroy-SemiBold');
+    }
+    @keyframes hopin {
+    0% {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes hopout {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+}
+
+    .swiper-pagination-bullet-active {
+        background-color: #3E1918;
+    }
+
+    </style>
+    
+<script>
+    const swiper = new Swiper('.swiper', {
+        direction: 'horizontal',
+        loop: false,
+        slidesPerView: 5,
+        spaceBetween: 20,
+
+        breakpoints: {
+            640: {
+                slidesPerView: 1,
+                spaceBetween: 30,
+            },
+            768: {
+                slidesPerView: 2,
+                spaceBetween: 40,
+            },
+            1024: {
+                slidesPerView: 3,
+                spaceBetween: 30,
+            },
+        },
+
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+
+        navigation: {
+            nextEl: '.next',
+            prevEl: '.prev',
+        },
+    });
+</script>
+
+</html>
